@@ -1,0 +1,60 @@
+@reference "tailwindcss";
+@import "tailwindcss/utilities";
+
+.box {
+  background-image: url("/background-login.jpg");
+}
+
+.box > section {
+  @apply w-[800px] h-[500px] flex  overflow-hidden;
+}
+
+form > label{
+  font-size: 15px;
+  font-weight: 600;
+  color: #333
+}
+
+form > input{
+  width: 88%;
+  height: 35px;
+  outline: none;
+  border: 1px solid #ccc;
+  border-radius:  6px;
+  padding: 6px 10px;
+  font-size: 14px;
+}
+
+form > input:focus {
+  border-color: #0e82c3;
+  box-shadow: 0 0 4px rgba(14, 130, 195, 0.3);
+}
+
+form button {
+  width: 120px;
+  height: 38px;
+  background: #0e82c3;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+form button:hover {
+  background: #106799;
+  transform: translateY(-1px);
+}
+
+a {
+  color: #0e82c3;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+a:hover {
+  color: #106799;
+  text-decoration: underline;
+}
