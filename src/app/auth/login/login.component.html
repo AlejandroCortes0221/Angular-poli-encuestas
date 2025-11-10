@@ -5,18 +5,18 @@
     fácil.
   </h2>
 
-  <form action="" class="mt-2 flex flex-col gap-2.5">
+  <form action="" class="mt-2 flex flex-col gap-3.5">
     <label for="" >Email</label>
     <input type="email" placeholder="Ingresa tu email" required />
 
     <label for="">Password</label>
     <input type="password" placeholder="Ingresa tu clave" required />
 
-    <button type="submit">Ingresar</button>
+    <button type="submit" class="mt-[20px]">Ingresar</button>
   </form>
 
   <div class="flex flex-col gap-2 mt-[15px]">
-    <a href=""> Olvide mi contraseña </a>
-    <a href="#"> Crear una cuenta </a>
+    <a routerLink="/auth/forget"> Olvide mi contraseña </a>
+    <a routerLink="/auth/register"> Crear una cuenta </a>
   </div>
 </section>
