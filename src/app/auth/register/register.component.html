@@ -4,23 +4,26 @@
     ¡Forma parte de nuestra comunidad! Crear tue cuenta es rapido y sencillo
   </h2>
 
-  <form action="" class="mt-1 flex flex-col gap-1">
+  <form (ngSubmit)="onSubmit()" ngNativeValidate class="mt-1 flex flex-col gap-1">
     <label for="">Nombres</label>
-    <input type="text" placeholder="Ingresa tus nombres" required />
+    <input type="text" placeholder="Ingresa tus nombres" [(ngModel)]="nombres" name="nombres" required />
 
     <label for="">Apellidos</label>
-    <input type="text" placeholder="Ingresa tus Apellidos" required />
+    <input type="text" placeholder="Ingresa tus Apellidos" [(ngModel)]="apellidos" name="apellidos" required />
 
     <label for="">Email</label>
-    <input type="email" placeholder="Ingresa tu email" required />
+    <input type="email" placeholder="Ingresa tu email" [(ngModel)]="email" name="email" required />
 
     <label for="">Password</label>
-    <input type="password" placeholder="Ingresa tu clave" required />
+    <input type="password" placeholder="Ingresa tu clave" [(ngModel)]="password" name="password" required />
 
     <label for="">Password Confirmación</label>
-    <input type="password" placeholder="Confirma tu clave" required />
+    <input type="password" placeholder="Confirma tu clave" [(ngModel)]="passwordConfirm" name="passwordConfirm"  required />
 
     <button type="submit" class="mx-auto mt-[5px]">Crear</button>
   </form>
   <a routerLink="/auth/login"> Ya tengo usuario </a>
+
+  <loading [type]="popupType" [message]="popupMessage()"></loading>
+
 </section>

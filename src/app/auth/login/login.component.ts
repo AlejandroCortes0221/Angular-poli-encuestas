@@ -1,12 +1,51 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, inject, signal } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { FormsModule, NgForm } from '@angular/forms'; // 👈 Importa esto
+import { AuthService } from '../../services/auth.service';
+import { finalize } from 'rxjs';
+import { LoadingComponent } from '../../shared/loading/loading.component';
 
 @Component({
   selector: 'app-login',
-  imports: [RouterLink],
+  imports: [RouterLink, FormsModule, LoadingComponent],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css','../auth.component.css']
+  styleUrls: ['./login.component.css', '../auth.component.css'],
 })
 export class LoginComponent {
+  private router = inject(Router);
+  private authService = inject(AuthService);
 
+  email = '';
+  password = '';
+  popupType: 'loading' | 'error' | 'success' | '' = '';
+  loading = signal(false);
+  popupMessage = signal('');
+
+  onSubmit() {
+
+    this.loading.set(true);
+    this.popupType = 'loading';
+    this.popupMessage.set('Verificando credenciales...');
+
+    const data = { email: this.email, password: this.password };
+
+    this.authService
+      .login(data)
+      .pipe(finalize(() => this.loading.set(false)))
+      .subscribe({
+        next: (res) => {
+          this.popupType = 'success';
+          this.popupMessage.set(`Bienvenido ${res.user?.pnombre ?? 'usuario'}`);
+          this.router.navigateByUrl('/dashboard');
+        },
+        error: (err) => {
+          this.popupType = 'error';
+          this.popupMessage.set(
+            err?.status === 401
+              ? 'Credenciales incorrectas'
+              : 'Error de conexión con el servidor'
+          );
+        },
+      });
+  }
 }

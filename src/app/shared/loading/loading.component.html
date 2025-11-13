@@ -1,0 +1,48 @@
+@if (visible() && type()) {
+<div class="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+  <div class="rounded-xl w-1/4 h-[200px] text-center bg-white text-gray-800">
+    <div
+      class="w-full h-2 rounded-t-sm"
+      [ngClass]="{
+        'bg-gray-800': type() === 'loading',
+        'bg-[#25ae88]': type() === 'success',
+        'bg-red-600': type() === 'error'
+      }"
+    ></div>
+    @if (type() !== 'loading') {
+    <div class="flex justify-end px-2 font-semibold text-xl">
+      <button
+        class="cursor-pointer"
+        [ngClass]="{
+        'text-gray-800': type() === 'loading',
+        'text-[#25ae88]': type() === 'success',
+        'text-red-600': type() === 'error'
+      }"
+      (click)="close()" >X</button>
+    </div>
+    }
+
+    <div class="mt-2">
+      @if (type() === 'loading') {
+      <div class="flex justify-center">
+        <div
+          class="w-20 h-20 border-4 mt-6 border-blue-500 border-t-transparent rounded-full animate-spin"
+        ></div>
+      </div>
+      } @if (type() === 'success') {
+      <picture class="flex justify-center">
+          <img src="/success.png" alt="Error" class="w-1/4 h-1/2">
+        </picture>
+      } @if (type() === 'error') {
+        <picture class="flex justify-center">
+          <img src="/error.jpg" alt="Error" class="w-1/4 h-1/2">
+        </picture>
+      }
+    </div>
+
+    <p class="text-base font-medium mt-5">
+      {{ message() }}
+    </p>
+  </div>
+</div>
+}
