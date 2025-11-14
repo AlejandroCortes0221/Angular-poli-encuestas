@@ -11,8 +11,8 @@ export const routes: Routes = [
     loadChildren: () => import('./auth/auth.routes'),
   },
   {
-    path: 'dashboard',
-    loadChildren: () => import('./poli-encuestas/pages/dashboard.routes'),
+    path: 'principal',
+    loadChildren: () => import('./poli-encuestas/pages/principal.routes'),
   },
   {
     path: '**',

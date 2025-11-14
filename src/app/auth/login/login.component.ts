@@ -36,7 +36,7 @@ export class LoginComponent {
         next: (res) => {
           this.popupType = 'success';
           this.popupMessage.set(`Bienvenido ${res.user?.pnombre ?? 'usuario'}`);
-          this.router.navigateByUrl('/dashboard');
+          this.router.navigateByUrl('/principal');
         },
         error: (err) => {
           this.popupType = 'error';
