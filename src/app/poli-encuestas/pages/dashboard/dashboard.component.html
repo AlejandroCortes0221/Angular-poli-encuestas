@@ -2,7 +2,13 @@
   <fa-icon [icon]="faGauge" class="mr-[2px]"></fa-icon>
   DASHBOARD
 </h1>
-<p class=" text-[#626262] mt-[25px]">¡Bienvenido! Este es el panel principal del sistema, aqui podrá encontrar atajos para acceder a los diferente modulos.</p>
-<section class="m-[100px]">
-
+<p class=" text-[#626262] mt-[25px]">¡Bienvenido! Este es el panel principal del sistema, aqui podrá encontrar atajos
+  para acceder a los diferente modulos.</p>
+<section class="mx-[50px] mt-[30px]">
+  <div class="flex justify-around flex-wrap gap-5">
+    @for (module of modules(); track module.id) {
+     <app-modules [nombre]="module.nombre" [icon]="module.icon" [total]="module.total" [ruta]="module.ruta" />
+    }
+  </div>
 </section>
+

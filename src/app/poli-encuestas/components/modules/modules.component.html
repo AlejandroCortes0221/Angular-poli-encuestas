@@ -1,1 +1,21 @@
-<p>modules works!</p>
+<button 
+    class="w-[200px] h-[200px] bg-white cursor-pointer flex flex-col items-center 
+            border border-gray-300 rounded-lg shadow-sm hover:shadow-md transition hover:bg-[#e4fcff]"
+    routerLink="{{ ruta }}">
+    
+    <!-- Parte superior (título) -->
+    <div class="w-full h-[40px] border-b border-gray-300 flex justify-center items-center rounded-t-lg">
+        <span class="text-sm font-semibold">{{ nombre }}</span>
+    </div>
+
+    <!-- Ícono -->
+    <div class="flex-1 flex items-center justify-center">
+       <fa-icon [icon]="icon" class="text-7xl"></fa-icon>
+    </div>
+
+    <!-- Texto inferior -->
+    <div class="h-[40px] flex justify-center items-center">
+        <span class="text-sm"> {{ total }} </span>
+    </div>
+
+</button>

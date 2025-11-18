@@ -5,14 +5,14 @@ import { EmpresasComponent } from "./empresas/empresas.component";
 import { ConfiguracionesComponent } from "./configuraciones/configuraciones.component";
 
 
-export const authRoutes: Routes = [
+export const principalRoutes: Routes = [
   {
     path: '',
     component: PrincipalComponent,
     children: [
       {
         path: 'dashboard',
-        component: DashboardComponent
+        loadChildren: () => import('./dashboard/dashboard.routes'),
       },
       {
         path: 'empresas',
@@ -30,4 +30,4 @@ export const authRoutes: Routes = [
   }
 ];
 
-export default authRoutes;
+export default principalRoutes;
