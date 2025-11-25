@@ -1,14 +1,22 @@
-<h1 class="text-2xl text-[#626262]">
-  <fa-icon [icon]="faGauge" class="mr-[2px]"></fa-icon>
-  DASHBOARD
-</h1>
-<p class=" text-[#626262] mt-[25px]">¡Bienvenido! Este es el panel principal del sistema, aqui podrá encontrar atajos
-  para acceder a los diferente modulos.</p>
-<section class="mx-[50px] mt-[30px]">
-  <div class="flex justify-around flex-wrap gap-5">
-    @for (module of modules(); track module.id) {
-     <app-modules [nombre]="module.nombre" [icon]="module.icon" [total]="module.total" [ruta]="module.ruta" />
-    }
-  </div>
-</section>
+<div class="w-full h-full flex flex-col justify-start items-center">
+  <header
+    class="w-full flex flex-col justify-start items-start bg-background rounded-xl p-6"
+  >
+    <h1 class="text-black text-8xl font-semibold">Dashboard</h1>
+    <p class="text-black text-xl font-regular mt-2">
+      ¡Bienvenido! Este es el panel principal del sistema, aqui podrá encontrar
+      atajos para acceder a los diferente modulos.
+    </p>
 
+    <button
+      class="btn shadow-md btn-primary rounded-full bg-primary-color h-[80px] w-[250px] mt-5 cursor-pointer text-white font-semibold text-xl"
+    >
+      Agregar encuesta
+    </button>
+  </header>
+  <div class="flex flex-1 justify-center items-center mt-10 gap-5 w-full">
+    <div class="w-[250px] h-[250px] bg-gray-200 animate-pulse rounded-xl"></div>
+    <div class="w-[250px] h-[250px] bg-gray-200 animate-pulse rounded-xl"></div>
+    <div class="w-[250px] h-[250px] bg-gray-200 animate-pulse rounded-xl"></div>
+  </div>
+</div>
