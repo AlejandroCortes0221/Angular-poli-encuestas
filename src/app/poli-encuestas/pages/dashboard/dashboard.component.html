@@ -1,14 +1,78 @@
-<h1 class="text-2xl text-[#626262]">
-  <fa-icon [icon]="faGauge" class="mr-[2px]"></fa-icon>
-  DASHBOARD
-</h1>
-<p class=" text-[#626262] mt-[25px]">¡Bienvenido! Este es el panel principal del sistema, aqui podrá encontrar atajos
-  para acceder a los diferente modulos.</p>
-<section class="mx-[50px] mt-[30px]">
-  <div class="flex justify-around flex-wrap gap-5">
-    @for (module of modules(); track module.id) {
-     <app-modules [nombre]="module.nombre" [icon]="module.icon" [total]="module.total" [ruta]="module.ruta" />
-    }
-  </div>
-</section>
+<div
+  class="w-full h-full flex flex-col justify-start items-center p-8 bg-[#181534] rounded-2xl shadow-xl"
+>
+  <header
+    class="w-full flex justify-between items-center pb-6 border-b border-white/10"
+  >
+    <div class="flex flex-col justify-start items-start">
+      <h1 class="text-white text-4xl font-semibold">Dashboard</h1>
+      <p class="text-gray-400 text-base font-regular mt-1">
+        ¡Bienvenido! Este es el panel principal del sistema.
+      </p>
+    </div>
 
+    <div class="relative w-72">
+      <input
+        type="text"
+        placeholder="Search..."
+        class="w-full py-2 pl-10 pr-4 rounded-full bg-background text-white placeholder-gray-400 border border-transparent focus:border-[#5D5DFF] focus:ring-1 focus:ring-[#5D5DFF] transition-all"
+      />
+      <i
+        class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+      ></i>
+    </div>
+  </header>
+
+  <div class="flex flex-col flex-1 w-full pt-6">
+    <div
+      class="w-full h-[180px] bg-background rounded-xl p-6 mb-6 shadow-lg shadow-black/20 flex justify-between items-center"
+    >
+      <h2 class="text-white text-2xl font-semibold">Total Empresas</h2>
+      <div class="w-1/2 h-full bg-[#39356D] rounded-lg animate-pulse"></div>
+    </div>
+
+    <div class="flex flex-1 justify-start items-start gap-6 w-full">
+      @if (isLoading()) {
+        <ng-container [ngTemplateOutlet]="skeletonTemplate" />
+      } @else {
+        <ng-container [ngTemplateOutlet]="contentTemplate" />
+      }
+    </div>
+  </div>
+</div>
+
+<ng-template #contentTemplate>
+  @for (item of contentEncuestas; track $index) {
+    <div
+      class="w-[300px] h-[350px] rounded-xl p-6 shadow-lg shadow-black/20 flex flex-col items-center justify-center"
+      [class]="item.classColor"
+    >
+      <h3 class="text-white text-lg mb-4">{{ item.nombre }}</h3>
+      <div
+        class="w-40 h-40 rounded-full bg-[#39356D] flex flex-col items-center justify-center"
+      >
+        <span class="text-white text-4xl font-bold">{{ item.total }}</span>
+        <span class="text-white text-sm">Registradas</span>
+      </div>
+      <button
+        class="bg-[#5D5DFF] text-white font-medium py-3 px-6 rounded-xl mt-6 hover:bg-[#4a4aed] transition-colors shadow-md shadow-[#5D5DFF]/30 cursor-pointer"
+        (click)="router.navigate([item.route])"
+      >
+        {{ item.btnText }}
+      </button>
+    </div>
+  }
+</ng-template>
+
+<ng-template #skeletonTemplate>
+  <div
+    class="w-[300px] h-[350px] bg-background rounded-xl animate-pulse shadow-lg shadow-black/20"
+  ></div>
+  <div
+    class="w-[300px] h-[350px] bg-background rounded-xl animate-pulse shadow-lg shadow-black/20"
+  ></div>
+
+  <div
+    class="w-[300px] h-[350px] bg-background rounded-xl animate-pulse shadow-lg shadow-black/20"
+  ></div>
+</ng-template>

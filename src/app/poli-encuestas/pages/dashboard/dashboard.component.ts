@@ -1,38 +1,51 @@
-import { Component, signal } from '@angular/core';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faGauge, faFile, faUser, faChartBar } from '@fortawesome/free-solid-svg-icons';
-import { ModulesComponent } from "../../components/modules/modules.component";
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [FontAwesomeModule, ModulesComponent],
+  imports: [NgTemplateOutlet],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  styleUrl: './dashboard.component.css',
 })
-export class DashboardComponent {
-  faGauge = faGauge;
-  modules = signal([
+export class DashboardComponent implements OnInit {
+  readonly router = inject(Router);
+
+  readonly isLoading = signal(true);
+
+  readonly contentEncuestas = [
     {
       id: 1,
-      nombre: "Encuestas",
-      icon: faFile,
-      total: "2 Registradas",
-      ruta: "encuestas"
+      nombre: 'Encuestas',
+      total: '2',
+      ruta: 'encuestas',
+      btnText: 'Agregar Encuesta',
+      classColor: 'bg-theme-orange',
+      route: 'encuestas/formularios',
     },
     {
       id: 2,
-      nombre: "Usuarios",
-      icon: faUser,
-      total: "4 Registrados",
-      ruta: "usuarios"
+      nombre: 'Usuarios',
+      total: '4',
+      ruta: 'usuarios',
+      btnText: 'Ver Usuarios',
+      classColor: 'bg-theme-pink',
+      route: 'encuestas/usuarios',
     },
     {
       id: 3,
-      nombre: "Reportes",
-      icon: faChartBar,
-      total: "2 Disponibles",
-      ruta: "reportes"
-    }
-  ])
+      nombre: 'Reportes',
+      total: '2',
+      ruta: 'reportes',
+      btnText: 'Ver Reportes',
+      classColor: 'bg-theme-purple',
+      route: 'encuestas/reportes',
+    },
+  ];
 
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.isLoading.set(false);
+    }, 1000);
+  }
 }

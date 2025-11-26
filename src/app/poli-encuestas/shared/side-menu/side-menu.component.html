@@ -1,0 +1,70 @@
+<aside
+  class="w-[288px] h-full flex flex-col border-gray-200 pt-8 bg-[#181534] shadow-xl shadow-black/30 text-white"
+>
+  <div class="flex items-center gap-2 px-6 mb-6">
+    <div
+      class="w-4 h-4 rounded-full bg-[#5D5DFF] shadow-lg shadow-[#5D5DFF]/50"
+    ></div>
+    <span class="text-xl font-bold text-white">Poligran</span>
+  </div>
+
+  <header class="flex flex-col items-center gap-2 pb-6 px-6">
+    <div
+      class="w-20 h-20 rounded-full bg-[#D4E0F0] flex items-center justify-center overflow-hidden mb-1"
+    >
+      <img
+        src="https://i.pravatar.cc/150?img=68"
+        alt="Avatar del usuario"
+        class="w-full h-full object-cover"
+      />
+    </div>
+
+    <h2 class="text-lg font-semibold text-white">Alejandro</h2>
+    <p class="text-sm text-center text-gray-400">Administrador</p>
+  </header>
+
+  <hr class="border-t border-white/10 mx-6 mb-4 mt-2 hidden" />
+
+  <section class="flex flex-col gap-1 w-full grow pt-4 px-3">
+    @for (route of routes; track route) {
+      <a
+        [routerLink]="route?.path"
+        routerLinkActive="bg-background"
+        class="group w-full h-[54px] px-5 mx-auto rounded-xl flex items-center gap-4 text-white transition-all duration-150 ease-out hover:bg-[#2D2A57]"
+      >
+        <i
+          class="fa-solid {{
+            route?.icon
+          }} text-xl text-white opacity-80 group-[.routerLinkActive]:opacity-100"
+        ></i>
+
+        <span
+          class="text-[16px] text-white font-medium opacity-80 group-[.routerLinkActive]:opacity-100 transition-colors duration-150"
+        >
+          {{ route?.title }}
+        </span>
+      </a>
+    }
+  </section>
+
+  <div class="p-4 mt-auto">
+    <div
+      class="bg-background rounded-xl p-4 flex flex-col justify-between h-[120px] shadow-lg shadow-black/20"
+    >
+      <div class="flex justify-between items-start">
+        <i class="fa-solid fa-people-group text-3xl text-white/90"></i>
+        <button class="text-white/70 hover:text-white transition-colors">
+          <i class="fa-solid fa-ellipsis-vertical text-xl"></i>
+        </button>
+      </div>
+      <div class="text-left">
+        <span class="text-white font-semibold text-base block">
+          Crea Encuestas
+        </span>
+        <span class="text-white/70 text-xs block">
+          Puedes crear encuestas para tus empresas en un solo lugar
+        </span>
+      </div>
+    </div>
+  </div>
+</aside>

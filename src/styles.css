@@ -1,26 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 @import "tailwindcss";
 @import "tailwindcss/utilities";
-
+@import url("https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap");
 
 * {
   box-sizing: border-box;
 }
 
-
 :root {
-  --primary-color: #0e82c3;
+  --font-family: "Google Sans Flex", sans-serif;
+  --color-background: #2d2a57;
+  --color-primary-color: #0c8ce9;
+  --color-secondary-color: #414173;
+  --color-theme-orange: #ff7979;
+  --color-theme-pink: #c95eff;
+  --color-theme-purple: #7984ff;
+  --color-theme-magenta: #685bff;
 }
 
 @theme {
-  --color-primary: var(--primary-color);
+  --font-family: var(--font-family);
+  --color-background: var(--color-background);
+  --color-primary-color: var(--color-primary-color);
+  --color-secondary-color: var(--color-secondary-color);
+  --color-theme-orange: var(--color-theme-orange);
+  --color-theme-pink: var(--color-theme-pink);
+  --color-theme-purple: var(--color-theme-purple);
+  --color-theme-magenta: var(--color-theme-magenta);
 }
 
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: var(--font-family);
+  background-color: var(--color-secondary-color);
 }
-
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
