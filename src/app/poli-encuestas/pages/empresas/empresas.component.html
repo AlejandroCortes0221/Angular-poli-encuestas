@@ -1,6 +1,6 @@
-<div class="w-full p-6 bg-[#2D2A57] rounded-xl shadow-lg shadow-black/20 mt-6">
+<div class="w-full p-6 bg-theme-blue-king rounded-xl shadow-lg shadow-black/20 mt-6">
   <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
-    <i class="fa-solid fa-industry text-[#5D5DFF]"></i>
+    <i class="fa-solid fa-industry text-theme-blue-king"></i>
     Listado de Empresas Registradas
   </h2>
 
@@ -9,14 +9,15 @@
       <input
         type="text"
         placeholder="Buscar por Nombre o NIT..."
-        class="w-full py-2 pl-10 pr-4 rounded-lg bg-[#39356D] text-white placeholder-gray-400 border border-transparent focus:border-[#5D5DFF] focus:ring-1 focus:ring-[#5D5DFF] transition-all"
+        class="w-full py-2 pl-10 pr-4 rounded-lg bg-theme-orange text-white placeholder-gray-400 border border-transparent focus:border-theme-blue-king focus:ring-1 focus:ring-theme-blue-king transition-all"
       />
       <i
         class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
       ></i>
     </div>
     <button
-      class="bg-[#78C2AD] text-white font-medium py-2 px-4 rounded-lg hover:bg-[#68a892] transition-colors flex items-center gap-2 shadow-md shadow-[#78C2AD]/20"
+      class="bg-[#78C2AD] text-white font-medium py-2 px-4 rounded-lg hover:bg-[#68a892] transition-colors flex items-center gap-2 shadow-md shadow-[#78C2AD]/20 cursor-pointer"
+      (click)="openDialog()"
     >
       <i class="fa-solid fa-plus"></i> Añadir Nueva Empresa
     </button>
@@ -24,7 +25,7 @@
 
   <div class="overflow-x-auto">
     <table class="min-w-full divide-y divide-white/10">
-      <thead class="bg-[#39356D]">
+      <thead class="bg-theme-orange  ">
         <tr>
           <th
             scope="col"
@@ -54,78 +55,39 @@
       </thead>
 
       <tbody class="divide-y divide-white/10">
-        <tr class="hover:bg-[#39356D] transition-colors duration-150">
-          <td class="px-6 py-4 whitespace-nowrap">
-            <div class="flex items-center">
-              <i class="fa-solid fa-building text-xl text-[#FADF63] mr-3"></i>
-              <div class="text-sm font-medium text-white">
-                Innovatech Solutions S.A.S.
+        @for (empresa of empresas(); track empresa.id) {
+          <tr class="hover:bg-theme-purple transition-colors duration-150">
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="flex items-center">
+                <i class="fa-solid fa-building text-xl text-[#FADF63] mr-3"></i>
+                <div class="text-sm font-medium text-white">
+                  {{ empresa.nombre }}
+                </div>
               </div>
-            </div>
-          </td>
+            </td>
 
-          <td class="px-6 py-4 whitespace-nowrap">
-            <div class="text-sm font-medium text-gray-400">900.123.456-7</div>
-          </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm font-medium text-gray-400">{{ empresa.nit }}</div>
+            </td>
 
-          <td class="px-6 py-4 whitespace-nowrap">
-            <div class="text-sm text-indigo-400 underline">
-              contacto&#64;innovatech.com
-            </div>
-          </td>
-
-          <td
-            class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
-          >
-            <button
-              title="Ver Detalles"
-              class="text-indigo-400 hover:text-indigo-300 mr-4"
-            >
-              <i class="fa-solid fa-eye text-lg"></i>
-            </button>
-            <button title="Editar" class="text-gray-400 hover:text-white mr-4">
-              <i class="fa-solid fa-pen text-lg"></i>
-            </button>
-            <button title="Eliminar" class="text-red-400 hover:text-red-300">
-              <i class="fa-solid fa-trash text-lg"></i>
-            </button>
-          </td>
-        </tr>
-
-        <tr class="hover:bg-[#39356D] transition-colors duration-150">
-          <td class="px-6 py-4 whitespace-nowrap">
-            <div class="flex items-center">
-              <i class="fa-solid fa-building text-xl text-[#78C2AD] mr-3"></i>
-              <div class="text-sm font-medium text-white">
-                Global Logistics Ltda.
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-indigo-400 underline">
+                {{ empresa.correo }}
               </div>
-            </div>
-          </td>
-          <td class="px-6 py-4 whitespace-nowrap">
-            <div class="text-sm font-medium text-gray-400">830.987.654-3</div>
-          </td>
-          <td class="px-6 py-4 whitespace-nowrap">
-            <div class="text-sm text-indigo-400 underline">
-              info&#64;globallogistics.co
-            </div>
-          </td>
-          <td
-            class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
-          >
-            <button
-              title="Ver Detalles"
-              class="text-indigo-400 hover:text-indigo-300 mr-4"
+            </td>
+
+            <td
+              class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
             >
-              <i class="fa-solid fa-eye text-lg"></i>
-            </button>
-            <button title="Editar" class="text-gray-400 hover:text-white mr-4">
-              <i class="fa-solid fa-pen text-lg"></i>
-            </button>
-            <button title="Eliminar" class="text-red-400 hover:text-red-300">
-              <i class="fa-solid fa-trash text-lg"></i>
-            </button>
-          </td>
-        </tr>
+              <button title="Editar" class="text-gray-400 hover:text-white mr-4 cursor-pointer" (click)="openDialog(empresa)">
+                <i class="fa-solid fa-pen text-lg"></i>
+              </button>
+              <button title="Eliminar" class="text-red-400 hover:text-red-300 cursor-pointer" (click)="eliminarEmpresa(empresa.id)">
+                <i class="fa-solid fa-trash text-lg"></i>
+              </button>
+            </td>
+          </tr>
+        }
       </tbody>
     </table>
   </div>

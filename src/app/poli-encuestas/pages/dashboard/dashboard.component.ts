@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
       total: '2',
       ruta: 'encuestas',
       btnText: 'Agregar Encuesta',
-      classColor: 'bg-theme-orange',
+      classColor: 'bg-[#2e3a48]',
       route: 'encuestas/formularios',
     },
     {
@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
       total: '4',
       ruta: 'usuarios',
       btnText: 'Ver Usuarios',
-      classColor: 'bg-theme-pink',
+      classColor: 'bg-[#2e3a48]',
       route: 'encuestas/usuarios',
     },
     {
@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit {
       total: '2',
       ruta: 'reportes',
       btnText: 'Ver Reportes',
-      classColor: 'bg-theme-purple',
+      classColor: 'bg-[#2e3a48]',
       route: 'encuestas/reportes',
     },
   ];

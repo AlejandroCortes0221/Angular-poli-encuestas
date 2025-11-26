@@ -9,13 +9,14 @@
 
 :root {
   --font-family: "Google Sans Flex", sans-serif;
-  --color-background: #2d2a57;
+  --color-background: #007bdb;
   --color-primary-color: #0c8ce9;
-  --color-secondary-color: #414173;
-  --color-theme-orange: #ff7979;
-  --color-theme-pink: #c95eff;
-  --color-theme-purple: #7984ff;
-  --color-theme-magenta: #685bff;
+  --color-secondary-color: #1c6dc3;
+  --color-theme-orange: #2e3a48;
+  --color-theme-pink: #1D75C8;
+  --color-theme-purple: #000ea4;
+  --color-theme-magenta: #6AB8FF;
+  --color-theme-blue-king:#0F2C4C;
 }
 
 @theme {
@@ -27,6 +28,7 @@
   --color-theme-pink: var(--color-theme-pink);
   --color-theme-purple: var(--color-theme-purple);
   --color-theme-magenta: var(--color-theme-magenta);
+  --color-theme-blue-king: var(--color-theme-blue-king);
 }
 
 body {
