@@ -9,16 +9,27 @@
 
 :root {
   --font-family: "Google Sans Flex", sans-serif;
-  --color-background: #9cd2ff;
+  --color-background: #2d2a57;
   --color-primary-color: #0c8ce9;
+  --color-secondary-color: #414173;
+  --color-theme-orange: #ff7979;
+  --color-theme-pink: #c95eff;
+  --color-theme-purple: #7984ff;
+  --color-theme-magenta: #685bff;
 }
 
 @theme {
   --font-family: var(--font-family);
   --color-background: var(--color-background);
   --color-primary-color: var(--color-primary-color);
+  --color-secondary-color: var(--color-secondary-color);
+  --color-theme-orange: var(--color-theme-orange);
+  --color-theme-pink: var(--color-theme-pink);
+  --color-theme-purple: var(--color-theme-purple);
+  --color-theme-magenta: var(--color-theme-magenta);
 }
 
 body {
   font-family: var(--font-family);
+  background-color: var(--color-secondary-color);
 }

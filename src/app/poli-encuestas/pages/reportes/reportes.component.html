@@ -1,0 +1,114 @@
+<div
+  class="w-full h-full flex flex-col justify-start items-center p-8 bg-[#181534] rounded-2xl shadow-xl text-white"
+>
+  <header class="w-full pb-6 border-b border-white/10 mb-8">
+    <h1 class="text-4xl font-semibold text-white">Generar Reporte</h1>
+    <p class="text-gray-400 text-base mt-1">
+      Selecciona la empresa, el reporte deseado y el formato de exportación.
+    </p>
+  </header>
+
+  <div class="w-full max-w-4xl flex flex-col gap-10">
+    <div class="bg-[#2D2A57] p-6 rounded-xl shadow-lg shadow-black/20">
+      <h2 class="text-xl font-bold mb-4 flex items-center gap-3">
+        <i class="fa-solid fa-building text-[#5D5DFF]"></i>
+        1. Selecciona la Empresa
+      </h2>
+      <select
+        class="w-full py-3 px-4 rounded-lg bg-[#39356D] border border-white/10 text-white focus:ring-[#5D5DFF] focus:border-[#5D5DFF] transition-all"
+      >
+        <option value="" disabled selected>-- Elige una empresa --</option>
+        <option value="empresa1">Teams.co S.A.</option>
+        <option value="empresa2">Innovatech Corp</option>
+        <option value="empresa3">Global Metrics Ltda.</option>
+      </select>
+    </div>
+
+    <div class="bg-[#2D2A57] p-6 rounded-xl shadow-lg shadow-black/20">
+      <h2 class="text-xl font-bold mb-4 flex items-center gap-3">
+        <i class="fa-solid fa-chart-line text-[#78C2AD]"></i>
+        2. Selecciona el Reporte
+      </h2>
+      <select
+        class="w-full py-3 px-4 rounded-lg bg-[#39356D] border border-white/10 text-white focus:ring-[#5D5DFF] focus:border-[#5D5DFF] transition-all"
+      >
+        <option value="" disabled selected>
+          -- Elige un reporte específico --
+        </option>
+        <option value="rep_ventas">Reporte de Ventas por Región</option>
+        <option value="rep_asistencia">Reporte de Asistencia Mensual</option>
+        <option value="rep_encuestas">
+          Reporte de Resultados de Encuestas
+        </option>
+        <option value="rep_pagos">Reporte de Pagos Pendientes</option>
+      </select>
+
+      <div class="mt-4 pt-4 border-t border-white/10 flex gap-4">
+        <div class="w-1/2">
+          <label class="block text-sm font-medium mb-1 text-gray-300"
+            >Fecha de Inicio</label
+          >
+          <input
+            type="date"
+            class="w-full py-2 px-3 rounded-lg bg-[#39356D] border border-white/10 text-white"
+          />
+        </div>
+        <div class="w-1/2">
+          <label class="block text-sm font-medium mb-1 text-gray-300"
+            >Fecha Fin</label
+          >
+          <input
+            type="date"
+            class="w-full py-2 px-3 rounded-lg bg-[#39356D] border border-white/10 text-white"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="bg-[#2D2A57] p-6 rounded-xl shadow-lg shadow-black/20 flex flex-col gap-6"
+    >
+      <h2 class="text-xl font-bold flex items-center gap-3">
+        <i class="fa-solid fa-file-export text-[#FADF63]"></i>
+        3. Elige el Formato
+      </h2>
+      <div class="flex gap-6">
+        <label
+          class="flex items-center gap-3 p-4 bg-[#39356D] rounded-lg cursor-pointer hover:bg-[#4a4a7a] transition-colors"
+        >
+          <input
+            type="radio"
+            name="formato"
+            value="pdf"
+            checked
+            class="form-radio h-5 w-5 text-[#FF6384] bg-transparent border-white/30 checked:ring-[#FF6384]"
+          />
+          <i class="fa-solid fa-file-pdf text-3xl text-[#FF6384]"></i>
+          <span class="font-medium">PDF</span>
+        </label>
+
+        <label
+          class="flex items-center gap-3 p-4 bg-[#39356D] rounded-lg cursor-pointer hover:bg-[#4a4a7a] transition-colors"
+        >
+          <input
+            type="radio"
+            name="formato"
+            value="excel"
+            class="form-radio h-5 w-5 text-[#4CAF50] bg-transparent border-white/30 checked:ring-[#4CAF50]"
+          />
+          <i class="fa-solid fa-file-excel text-3xl text-[#4CAF50]"></i>
+          <span class="font-medium">Excel</span>
+        </label>
+
+        <div class="w-full flex justify-end pt-4 border-t border-white/10">
+          <button
+            class="bg-[#5D5DFF] text-white font-bold text-lg py-3 px-8 rounded-xl hover:bg-[#4a4aed] transition-colors shadow-lg shadow-[#5D5DFF]/40 flex items-center gap-2"
+          >
+            <i class="fa-solid fa-download"></i>
+            Generar Reporte Ahora
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

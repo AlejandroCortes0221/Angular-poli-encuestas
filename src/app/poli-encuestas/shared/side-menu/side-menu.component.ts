@@ -8,16 +8,30 @@ import poliEncuentasRoutes from '../../poli-encuentas.routes';
   templateUrl: './side-menu.component.html',
 })
 export class SideMenuComponent {
-  readonly routes =
-    poliEncuentasRoutes[0].children
-      ?.map((route) => ({
-        name: (route?.title ?? '') as string,
-        path: (route?.path ?? '') as string,
-        icon: route?.data?.['icon'],
-      }))
-      .filter((route) => route.name !== '') || [];
+  readonly routes = [
+    {
+      path: 'dashboard',
+      title: 'Dashboard',
+      icon: 'fa-house',
+    },
+    {
+      path: 'companies',
+      title: 'Empresas',
+      icon: 'fa-building',
+    },
+    {
+      path: 'settings',
+      title: 'Configuraciones',
+      icon: 'fa-bell',
+    },
+  ];
 
-  constructor() {
-    console.log(this.routes);
-  }
+  // readonly routes =
+  //   poliEncuentasRoutes[0].children
+  //     ?.map((route) => ({
+  //       name: (route?.title ?? '') as string,
+  //       path: (route?.path ?? '') as string,
+  //       icon: route?.data?.['icon'],
+  //     }))
+  //     .filter((route) => route.name !== '') || [];
 }
