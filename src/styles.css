@@ -10,28 +10,28 @@
 :root {
   --font-family: "Google Sans Flex", sans-serif;
   --color-background: #007bdb;
-  --color-primary-color: #0c8ce9;
-  --color-secondary-color: #1c6dc3;
+  --color-primary-color : #0c8ce9;
+  --color-secondary-color: #176bc5;
   --color-theme-orange: #2e3a48;
   --color-theme-pink: #1D75C8;
-  --color-theme-purple: #000ea4;
+  --color-theme-purple: #000ea48f;
   --color-theme-magenta: #6AB8FF;
-  --color-theme-blue-king:#0F2C4C;
+  --color-theme-blue-king :#0F2C4C;
 }
 
 @theme {
   --font-family: var(--font-family);
   --color-background: var(--color-background);
-  --color-primary-color: var(--color-primary-color);
+  --color-primary-color : var(--color-primary-color );
   --color-secondary-color: var(--color-secondary-color);
   --color-theme-orange: var(--color-theme-orange);
   --color-theme-pink: var(--color-theme-pink);
   --color-theme-purple: var(--color-theme-purple);
   --color-theme-magenta: var(--color-theme-magenta);
-  --color-theme-blue-king: var(--color-theme-blue-king);
+  --color-theme-blue-king : var(--color-theme-blue-king );
 }
 
 body {
   font-family: var(--font-family);
-  background-color: var(--color-secondary-color);
+  background-image: url("/background-login.jpg");
 }

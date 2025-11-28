@@ -1,0 +1,175 @@
+
+<section class="flex gap-5 justify-around bg-theme-blue-king h-full">
+  <!-- Roles a partir de aqui-->
+  <div class="flex flex-col gap-5 my-auto">
+    <div class="flex justify-center items-start flex-col h-200px ">
+      <form
+        class="w-[400px] p-6 rounded-lg shadow-sm space-y-5 bg-[#2862e15f] max-h-[330px] overflow-y-auto"
+        (ngSubmit)="submitRol()"
+      >
+        <h1 class="text-white"> Roles Usuario </h1>
+        @for (roles of rolesUsuario(); track roles.id) {
+          <div class="flex justify-between items-center">
+            <!-- Nombre -->
+            <div>
+              <h2 class="text-xl text-white"> {{ roles.nombre }}</h2>
+            </div>
+
+            <!-- Activo -->
+            <div>
+              <input
+                type="checkbox"
+                class="h-4 w-4 bg-gray-100 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500  placeholder:text-gray-400"
+                [checked]="roles.activo"
+                (change)="toggle(roles, $event)"
+
+              />
+            </div>
+          </div>
+        }
+        <!-- Botón -->
+        <button
+          type="submit"
+          class="w-full bg-blue-600 text-white py-2.5 rounded-md hover:bg-blue-700 transition-all shadow-sm cursor-pointer"
+        >
+        Editar
+        </button>
+      </form>
+    </div>
+
+
+    <!-- Empresas a partir de aqui-->
+
+    <div class="flex justify-center items-start flex-col h-200px  ">
+      <form
+        class="w-[400px] p-6 rounded-lg shadow-sm space-y-5 bg-[#2862e15f] max-h-[200px] overflow-y-auto"
+        [formGroup]="myFormEmpresa"
+        (ngSubmit)="submitEmpresa()"
+      >
+        <h1 class="text-white"> Empresas Usuario </h1>
+        @for (empresa of empresasUsuario(); track empresa.id) {
+          <div class="flex justify-between items-center">
+            <!-- Nombre -->
+            <div>
+            <h2 class="text-xl text-white"> {{ empresa.nombre }}</h2>
+            </div>
+
+            <!-- Activo -->
+            <div>
+              <input
+                type="checkbox"
+                class="h-4 w-4 bg-gray-100 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500  placeholder:text-gray-400"
+                [checked]="empresa.activo"
+                (change)="toggle(empresa, $event)"
+              />
+            </div>
+          </div>
+        }
+
+        <!-- Botón -->
+
+        <button
+          type="submit"
+          class="w-full bg-blue-600 text-white py-2.5 rounded-md hover:bg-blue-700 transition-all shadow-sm cursor-pointer"
+        >
+        Editar
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="flex justify-start items-center w-400px">
+    <form
+      class="p-6 rounded-lg shadow-sm space-y-5 w-[350px] flex flex-col flex-wrap bg-[#2862e15f]"
+      [formGroup]="myForm"
+      (ngSubmit)="submit()"
+    >
+      <!-- Nombre -->
+      <div>
+        <label for="nombres" class="block mb-1 text-sm font-medium text-white">
+          nombres
+        </label>
+
+        <input
+          type="text"
+          id="nombres"
+          formControlName="nombres"
+          class="w-[300px] px-3 py-2.5 bg-gray-100 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 text-sm placeholder:text-gray-400"
+          placeholder="nombres"
+          required
+          tabindex="0"
+        />
+
+        @if(errorField('nombres')){
+          <span class="text-sm text-red-500">Este campo es requerido</span>
+        }
+      </div>
+
+      <!-- NIT -->
+      <div>
+        <label for="apellidos" class="block mb-1 text-sm font-medium text-white">
+          Apellidos
+        </label>
+
+        <input
+          type="text"
+          id="apellidos"
+          formControlName="apellidos"
+          class="w-[300px] px-3 py-2.5 bg-gray-100 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm placeholder:text-gray-400"
+          placeholder="Ingresa los apellidos"
+          required
+        />
+
+        @if(errorField('apellidos')){
+        <span class="text-sm text-red-500">Este campo es requerido</span>
+        }
+      </div>
+
+      <!-- Correo -->
+      <div>
+        <label for="email" class="block mb-1 text-sm font-medium text-white">
+          Correo
+        </label>
+
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="w-[300px] px-3 py-2.5 bg-gray-100 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm placeholder:text-gray-400"
+          placeholder="Ingresa el Correo"
+          required
+        />
+
+        @if(errorField('email')){
+        <span class="text-sm text-red-500">Este campo es requerido</span>
+        }
+      </div>
+
+
+      <!-- Activo -->
+      <div class="flex justify-between">
+        <label for="activo" class="block mb-1 text-sm font-medium text-white">
+          activo
+        </label>
+
+        <input
+          type="checkbox"
+          id="activo"
+          formControlName="activo"
+          class="h-4 w-4 bg-gray-100 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500  placeholder:text-gray-400"
+          required
+        />
+      </div>
+
+      <!-- Botón -->
+      <button
+        type="submit"
+        class="w-full bg-blue-600 text-white py-2.5 rounded-md hover:bg-blue-700 transition-all shadow-sm cursor-pointer"
+      >
+      Editar
+      </button>
+    </form>
+  </div>
+</section>
+
+<loading [type]="popupType" [message]="popupMessage()"></loading>

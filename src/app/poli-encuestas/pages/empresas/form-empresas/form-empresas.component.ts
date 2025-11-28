@@ -20,6 +20,8 @@ export class FormEmpresasComponent {
   private fb = inject(FormBuilder);
   private empresaService = inject(EmpresaService);
   private dialogRef = inject(MatDialogRef<FormEmpresasComponent>);
+  originalEmpresas: any[] = [];
+
 
   // Recibir datos para edición
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
@@ -46,11 +48,34 @@ export class FormEmpresasComponent {
         email: this.data.correo,
       });
     }
+
+    this.originalEmpresas = JSON.parse(JSON.stringify(this.myForm.value));
+  }
+
+
+  mostrarPopup(type: 'success' | 'error' | 'loading', message: string) {
+    // reset para que Angular detecte cambios
+    this.popupType = '';
+    this.popupMessage.set('');
+
+    setTimeout(() => {
+      this.popupType = type;
+      this.popupMessage.set(message);
+    }, 0);
+  }
+
+  hayCambiosEmpresas(): boolean {
+    return JSON.stringify(this.originalEmpresas) !== JSON.stringify(this.myForm.value);
   }
 
   submit(): void {
     if (this.myForm.invalid) {
       this.myForm.markAllAsTouched();
+      return;
+    }
+
+    if (!this.hayCambiosEmpresas()) {
+      this.mostrarPopup('error', 'No hay cambios en la empresa');
       return;
     }
 

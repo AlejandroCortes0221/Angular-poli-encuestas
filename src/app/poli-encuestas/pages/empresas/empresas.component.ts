@@ -5,16 +5,20 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormEmpresasComponent } from './form-empresas/form-empresas.component';
 import { EmpresaService } from '../../services/empresa.service';
+import { finalize } from 'rxjs';
+import { LoadingComponent } from "../../../shared/loading/loading.component";
 @Component({
   selector: 'app-empresas',
-  imports: [MatFormFieldModule, MatInputModule, MatButtonModule],
+  imports: [MatFormFieldModule, MatInputModule, MatButtonModule, LoadingComponent],
   templateUrl: './empresas.component.html',
   styleUrl: './empresas.component.css'
 })
 export class EmpresasComponent {
   readonly dialog = inject(MatDialog);
   private empresaService = inject(EmpresaService);
-
+  loading = signal(false);
+  popupMessage = signal('');
+  popupType: 'loading' | 'error' | 'success' | '' = '';
 
   // Puedes usar signal para manejo reactivo
   empresas = signal<any[]>([]);
@@ -25,25 +29,50 @@ export class EmpresasComponent {
 
 
   cargarEmpresas() {
-    this.empresaService.getEmpresa().subscribe({
+
+    this.loading.set(true);
+    this.popupType = 'loading';
+    this.popupMessage.set('Cargando Empresas...');
+
+
+    this.empresaService
+    .getEmpresa()
+    .pipe(finalize(() => this.loading.set(false)))
+    .subscribe({
       next: (res) => {
         this.empresas.set(res);
+        this.popupType = '';         // opcional: limpiar popup
+        this.popupMessage.set('');
       },
       error: (err) => {
-        console.error('Error cargando empresas', err);
+        this.popupType = 'error';
+        this.popupMessage.set('Error cargando empresas');
       }
     });
   }
 
+
+
   eliminarEmpresa(id: number) {
     if (!confirm("¿Seguro que deseas eliminar esta empresa?")) return;
-    this.empresaService.deleteEmpresa(id).subscribe({
+
+    this.loading.set(true);
+    this.popupType = 'loading';
+    this.popupMessage.set('Eliminando Empresa...');
+
+    this.empresaService
+    .deleteEmpresa(id)
+    .pipe(finalize(()=> this.loading.set(true)))
+    .subscribe({
       next: () => {
         // Recargar la lista
         this.cargarEmpresas();
       },
       error: (err) => {
-        console.error("Error eliminando empresa", err);
+        this.popupType = 'error';
+        this.popupMessage.set(err.error.message);
+        console.log(err);
+
       }
     });
   }

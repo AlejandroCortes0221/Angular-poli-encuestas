@@ -1,4 +1,4 @@
-<div class="w-full p-6 bg-[#2D2A57] rounded-xl shadow-lg shadow-black/20 mt-6">
+<div class="w-full p-6 bg-theme-blue-king  rounded-xl shadow-lg shadow-black/20 mt-6">
   <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
     <i class="fa-solid fa-table text-[#FADF63]"></i>
     Listado de Usuarios
@@ -6,134 +6,84 @@
 
   <div class="overflow-x-auto">
     <table class="min-w-full divide-y divide-white/10">
-      <thead class="bg-[#39356D]">
+      <thead class="bg-theme-orange">
         <tr>
           <th
             scope="col"
             class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider rounded-tl-lg"
           >
-            Nombre
+            Nombres
           </th>
           <th
             scope="col"
             class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider"
           >
-            ID de Usuario
+            Apellidos
           </th>
           <th
             scope="col"
-            class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider rounded-tr-lg"
+            class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider"
           >
-            Rol
+            correo
           </th>
-          <th scope="col" class="relative px-6 py-3 rounded-tr-lg">
-            <span class="sr-only">Acciones</span>
+           <th
+            scope="col"
+            class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider"
+          >
+            Activo
+          </th>
+          <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider rounded-tr-lg ">
+            Acciones
           </th>
         </tr>
       </thead>
 
       <tbody class="divide-y divide-white/10">
-        @for (user of "1,2,3,4,5,".split(","); track $index) {
-          <tr class="hover:bg-[#39356D] transition-colors duration-150">
-            <td class="px-6 py-4 whitespace-nowrap">
-              <div class="flex items-center">
-                <i
-                  class="fa-solid fa-user-circle text-xl text-theme-blue-king mr-3"
-                ></i>
-                <div class="text-sm font-medium text-white">
-                  <!-- {{ user.name }} -->
-                  {{ $index }}
-                </div>
-              </div>
-            </td>
-
-            <td class="px-6 py-4 whitespace-nowrap">
-              <div class="text-sm text-gray-400">#{{ $index }}</div>
-            </td>
-
-            <td class="px-6 py-4 whitespace-nowrap">
-              <!-- <span
-                [class]="{
-                  'bg-red-600/20 text-red-400': user.role === 'Admin',
-                  'bg-green-600/20 text-green-400': user.role === 'Editor',
-                  'bg-blue-600/20 text-blue-400': user.role === 'Viewer',
-                }"
-                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full"
-              >
-                {{ user.role }}
-              </span> -->
-            </td>
-
-            <td
-              class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
-            >
-              <button class="text-indigo-400 hover:text-indigo-300 mr-4">
-                <i class="fa-solid fa-pen"></i>
-              </button>
-              <button class="text-red-400 hover:text-red-300">
-                <i class="fa-solid fa-trash"></i>
-              </button>
-            </td>
-          </tr>
-        }
-
-        <tr class="hover:bg-[#39356D] transition-colors duration-150">
-          <td class="px-6 py-4 whitespace-nowrap">
-            <div class="flex items-center">
-              <i
-                class="fa-solid fa-user-circle text-xl text-theme-blue-king mr-3"
-              ></i>
-              <div class="text-sm font-medium text-white">Aman Smith</div>
-            </div>
-          </td>
-          <td class="px-6 py-4 whitespace-nowrap">
-            <div class="text-sm text-gray-400">#47291</div>
-          </td>
-          <td class="px-6 py-4 whitespace-nowrap">
-            <span
-              class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-600/20 text-red-400"
-              >Admin</span
-            >
-          </td>
-          <td
-            class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
-          >
-            <button class="text-indigo-400 hover:text-indigo-300 mr-4">
-              <i class="fa-solid fa-pen"></i></button
-            ><button class="text-red-400 hover:text-red-300">
-              <i class="fa-solid fa-trash"></i>
-            </button>
-          </td>
-        </tr>
-        <tr class="hover:bg-[#39356D] transition-colors duration-150">
+        @for (user of usuarios(); track user.id) {
+          <tr class="hover:bg-[#0e3967] transition-colors duration-150">
           <td class="px-6 py-4 whitespace-nowrap">
             <div class="flex items-center">
               <i
                 class="fa-solid fa-user-circle text-xl text-[#78C2AD] mr-3"
               ></i>
-              <div class="text-sm font-medium text-white">Jane Doe</div>
+              <div class="text-sm font-medium text-white">{{ user.nombres }}</div>
             </div>
           </td>
           <td class="px-6 py-4 whitespace-nowrap">
-            <div class="text-sm text-gray-400">#47302</div>
+            <div class="text-sm text-gray-400">{{ user.apellidos }}</div>
           </td>
-          <td class="px-6 py-4 whitespace-nowrap">
-            <span
-              class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-600/20 text-green-400"
-              >Editor</span
-            >
+           <td class="px-6 py-4 whitespace-nowrap">
+            <div class="text-sm text-gray-400">{{ user.correo }}</div>
           </td>
+           <td class="px-6 py-4 whitespace-nowrap">
+            <input
+              type="checkbox"
+              class="h-5 w-5 rounded border-gray-400 text-theme-orange cursor-not-allowed disabled:opacity-100"
+              [checked]="user.activo"
+              disabled
+            />
+          </td>
+
           <td
             class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
           >
-            <button class="text-indigo-400 hover:text-indigo-300 mr-4">
-              <i class="fa-solid fa-pen"></i></button
-            ><button class="text-red-400 hover:text-red-300">
+           <button
+            class="text-white hover:text-indigo-300 mr-4 cursor-pointer"
+            (click)="openDialog(user)"
+          >
+              <i class="fa-solid fa-eye"></i>
+            </button>
+            <button
+              class="text-red-400 hover:text-red-300 cursor-pointer"
+              (click)="eliminarUsuario(user.id)"
+            >
               <i class="fa-solid fa-trash"></i>
             </button>
           </td>
         </tr>
+        }
       </tbody>
     </table>
   </div>
 </div>
+<loading [type]="popupType" [message]="popupMessage()"></loading>

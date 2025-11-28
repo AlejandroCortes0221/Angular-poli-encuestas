@@ -1,6 +1,6 @@
-<div class="w-full p-6 bg-theme-blue-king rounded-xl shadow-lg shadow-black/20 mt-6">
+<div class="w-full p-6 bg-theme-blue-king  rounded-xl shadow-lg shadow-black/20 mt-6">
   <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
-    <i class="fa-solid fa-industry text-theme-blue-king"></i>
+    <i class="fa-solid fa-industry text-theme-blue-king "></i>
     Listado de Empresas Registradas
   </h2>
 
@@ -9,7 +9,7 @@
       <input
         type="text"
         placeholder="Buscar por Nombre o NIT..."
-        class="w-full py-2 pl-10 pr-4 rounded-lg bg-theme-orange text-white placeholder-gray-400 border border-transparent focus:border-theme-blue-king focus:ring-1 focus:ring-theme-blue-king transition-all"
+        class="w-full py-2 pl-10 pr-4 rounded-lg bg-theme-orange text-white placeholder-gray-400 border border-transparent focus:border-theme-blue-king  focus:ring-1 focus:ring-theme-blue-king  transition-all"
       />
       <i
         class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
@@ -92,3 +92,4 @@
     </table>
   </div>
 </div>
+<loading [type]="popupType" [message]="popupMessage()"></loading>
