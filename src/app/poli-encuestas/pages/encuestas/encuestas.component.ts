@@ -1,48 +1,95 @@
-import { Component } from '@angular/core';
-import { SurveyModule } from "survey-angular-ui";
-import { Model } from 'survey-core';
-// survey.component.ts
-import "survey-core/survey-core.min.css";
+import { Component, inject, signal } from '@angular/core';
+import { EncuestaService } from '../../services/encuesta.service';
+import { MatDialog } from '@angular/material/dialog';
+import { finalize } from 'rxjs';
+import { LoadingComponent } from "../../../shared/loading/loading.component";
+import { FormsEncuestaComponent } from './forms-encuesta/forms-encuesta.component';
 
-
-const surveyJson = {
-  pages: [{
-    name: "PersonalDetails",
-    elements: [{
-      type: "text",
-      name: "FirstName",
-      title: "Enter your first name:"
-    }, {
-      type: "text",
-      name: "LastName",
-      title: "Enter your last name:"
-    }, {
-      type: "panel",
-      name: "Contacts",
-      state: "collapsed",
-      title: "Contacts (optional)",
-      elements: [{
-        type: "text",
-        name: "Telegram",
-        title: "Telegram:"
-      }, {
-        type: "text",
-        name: "GitHub",
-        title: "GitHub username:"
-      }]
-    }]
-  }]
-};
 
 @Component({
   selector: 'app-encuestas',
-  imports: [SurveyModule],
+  standalone: true,
+  imports: [LoadingComponent],
   templateUrl: './encuestas.component.html',
   styleUrl: './encuestas.component.css'
 })
 export class EncuestasComponent {
+  private encuestaService = inject(EncuestaService);
+  encuestas = signal<any[]>([]);
+  readonly dialog = inject(MatDialog);
+  userId!: number;
 
-  surveyModel: Model = new Model(surveyJson);
+  loading = signal(false);
+  popupMessage = signal('');
+  popupType: 'loading' | 'error' | 'success' | '' = '';
 
-  constructor() { }
+  constructor() {
+    const userIdString = sessionStorage.getItem('userId');
+    this.userId = Number(userIdString);
+  }
+
+  ngOnInit(): void {
+    this.cargarEncuestas();
+  }
+
+
+  cargarEncuestas() {
+    this.loading.set(true);
+    this.popupType = 'loading';
+    this.popupMessage.set('Cargando Encuestas...');
+
+
+    this.encuestaService
+    .getEncuestasPorUsuario(this.userId)
+    .pipe(finalize(() => this.loading.set(false)))
+    .subscribe({
+      next: (res) => {
+        this.encuestas.set(res);        
+        this.popupType = '';         // opcional: limpiar popup
+        this.popupMessage.set('');
+      },
+      error: (err) => {
+        this.popupType = 'error';
+        this.popupMessage.set('Error cargando Encuestas');
+      }
+    });
+  }
+
+  openDialog(encuesta?: any): void {
+    const dialogRef = this.dialog.open(FormsEncuestaComponent, {
+      width: '90vw',
+      height: '580px',
+      maxWidth: '90vw',
+      data: encuesta ?? null
+    });
+
+    dialogRef.afterClosed().subscribe((refresh: boolean | undefined) => {
+      if (refresh) {
+        this.cargarEncuestas();
+      }
+    });
+  }
+
+  eliminarEncuesta(id: number) {
+    if (!confirm('¿Seguro que deseas eliminar esta encuesta?')) return;
+
+    this.loading.set(true);
+    this.popupType = 'loading';
+    this.popupMessage.set('Eliminando Encuesta...');
+
+    this.encuestaService
+    .deleteEncuesta(id)
+    .pipe(finalize(() => this.loading.set(false)))
+    .subscribe({
+      next: () => {
+        this.popupType = 'success';
+        this.popupMessage.set('Encuesta Eliminado');
+        this.cargarEncuestas(); // refrescar lista
+      },
+      error: (err) => {
+        this.popupType = 'error';
+        this.popupMessage.set('Error Eliminando Encuesta');
+      }
+    });
+  }
 }

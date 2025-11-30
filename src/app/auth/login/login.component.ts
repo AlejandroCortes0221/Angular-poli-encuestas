@@ -34,6 +34,10 @@ export class LoginComponent {
       .pipe(finalize(() => this.loading.set(false)))
       .subscribe({
         next: (res) => {
+            // 🟦 GUARDAR EN SESSION STORAGE
+          sessionStorage.setItem('userId', res.user?.id);
+          sessionStorage.setItem('userData', JSON.stringify(res));
+
           this.popupType = 'success';
           this.popupMessage.set(`Bienvenido ${res.user?.pnombre ?? 'usuario'}`);
           this.router.navigateByUrl('/encuestas');

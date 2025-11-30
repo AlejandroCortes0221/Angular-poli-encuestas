@@ -1,0 +1,82 @@
+<div
+  class="w-[60%] mx-auto h-screen flex flex-col justify-start items-center p-8 bg-theme-blue-king shadow-xl text-white overflow-auto"
+>
+  <form class="w-[80%] h-full max-w-6xl flex flex-col gap-1 mx-auto">
+
+    <div class="flex gap-6 w-full justify-center items-center h-full">
+      <!-- ========== COLUMNA DERECHA (PREGUNTAS) ========== -->
+      <div class="w-2/3">
+        <div class="bg-[#1432727e] p-6 rounded-xl shadow-lg shadow-black/20 h-full overflow-auto">
+            <div class="flex justify-between">
+                <div class="text-xl font-bold mb-6">
+                    <div class="flex items-center gap-1">
+                        <i class="fa-solid fa-circle-question text-[#78C2AD]"></i>
+                        <h3 class="text-gray-950">Titulo:</h3>
+                    </div>
+                <h4 class="text-[17px] mt-2"> {{ titulo }}</h4>
+                </div>
+
+                <div class="text-xl font-bold mb-6">
+                    <div class="flex items-center gap-1">
+                        <i class="fa-solid fa-circle-question text-[#78C2AD]"></i>
+                        <h3 class="text-gray-950">Disponible hasta:</h3>
+                    </div>
+                <h4 class="text-[17px] mt-2"> {{ fechaCierre }}</h4>
+                </div>
+            </div>
+            
+        <div class="text-xl font-bold mb-6">
+            <h3 class="text-gray-950" >Descripción:</h3>
+            <textarea name="" id="" disabled class="resize-none text-[17px] mt-2 w-full border border-white/10 p-4 rounded-lg mb-4 bg-[#2c51a07e]">{{ descripcion }}</textarea>
+        </div>
+
+        
+          <!-- LISTA DE PREGUNTAS DINÁMICAS -->
+          @for (pregunta of preguntas; let i = $index; track i) {
+            <div class="border border-white/10 p-4 rounded-lg mb-4 bg-[#2c51a07e]">
+              <!-- Texto de la pregunta -->
+               <h1> {{ pregunta.texto }}</h1>
+
+
+              <!-- Opciones si es tipo multiple -->
+              @if (pregunta.tipo === 'multiple') {
+                <div class="text-sm text-gray-300">
+                  <p class="mb-1">Opciones:</p>
+
+                  @for (opcion of pregunta.opciones; let idx = $index; track idx) {
+                    <div class="flex items-center mb-1 gap-2">
+                      <input type="checkbox">
+
+                      <div
+                        class="w-full py-1 px-2 rounded-md bg-[#3b3b3be0]   border border-white/10 text-white text-sm"
+                      > {{ pregunta.opciones[idx] }}</div>
+                    </div>
+                  }
+                </div>
+              } @else {
+                <input
+                    type="text"
+                    name="pregunta_{{ i }}" 
+                    placeholder="Escribe tu respuesta"
+                    class="w-full py-2 px-3 rounded-lg bg-[#3b3b3be0]  border border-white/10 text-white mb-3"
+                />
+              }
+            </div>
+          }
+
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTÓN GUARDAR -->
+    <div class="w-full flex justify-center mt-4">
+      <button
+        type="button"
+        class="bg-[#2c51a07e] text-white font-bold text-lg py-3 px-8 rounded-xl hover:bg-[#224797e0] transition-colors shadow-lg shadow-theme-blue-king/40 flex items-center gap-2 cursor-pointer mb-4"
+      >
+        <i class="fa-solid fa-paper-plane"></i>
+        Guardar Respuestas
+      </button>
+    </div>
+  </form>
+</div>
