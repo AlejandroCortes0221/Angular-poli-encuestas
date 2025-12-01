@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import poliEncuentasRoutes from '../../poli-encuentas.routes';
 
 @Component({
   selector: 'app-side-menu',
@@ -8,16 +7,12 @@ import poliEncuentasRoutes from '../../poli-encuentas.routes';
   templateUrl: './side-menu.component.html',
 })
 export class SideMenuComponent {
-  readonly routes = [
+
+  readonly routes: any[] = [
     {
       path: 'dashboard',
       title: 'Dashboard',
       icon: 'fa-house',
-    },
-    {
-      path: 'companies',
-      title: 'Empresas',
-      icon: 'fa-building',
     },
     {
       path: 'settings',
@@ -26,12 +21,24 @@ export class SideMenuComponent {
     },
   ];
 
-  // readonly routes =
-  //   poliEncuentasRoutes[0].children
-  //     ?.map((route) => ({
-  //       name: (route?.title ?? '') as string,
-  //       path: (route?.path ?? '') as string,
-  //       icon: route?.data?.['icon'],
-  //     }))
-  //     .filter((route) => route.name !== '') || [];
+  constructor() {
+    const userInfoString = sessionStorage.getItem('userInfo');
+
+    if (userInfoString) {
+      const userInfo = JSON.parse(userInfoString);
+
+      const tieneModuloEmpresas = userInfo.modulos?.some(
+        (mod: any) => mod.id === 1
+      );
+
+      if (tieneModuloEmpresas) {
+        // Insertar como segundo elemento (índice 1)
+        this.routes.splice(1, 0, {
+          path: 'companies',
+          title: 'Empresas',
+          icon: 'fa-building',
+        });
+      }
+    }
+  }
 }

@@ -19,4 +19,8 @@ export class AuthService {
   createUser(data: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/users`, data);
   }
+
+  getInfoUsuario(id: number): Observable<any> {
+    return this.http.get<any[]>(`${this.apiUrl}/users/info/ ${id}`);
+  }
 }

@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms'; // 👈 Importa esto
 import { AuthService } from '../../services/auth.service';
 import { finalize } from 'rxjs';
@@ -14,6 +14,7 @@ import { LoadingComponent } from '../../shared/loading/loading.component';
 export class LoginComponent {
   private router = inject(Router);
   private authService = inject(AuthService);
+  private route = inject(ActivatedRoute);
 
   email = '';
   password = '';
@@ -38,9 +39,22 @@ export class LoginComponent {
           sessionStorage.setItem('userId', res.user?.id);
           sessionStorage.setItem('userData', JSON.stringify(res));
 
+          this.authService
+          .getInfoUsuario(res.user?.id)
+          .pipe(finalize(() => this.loading.set(false)))
+          .subscribe({
+            next: (res) => {
+              sessionStorage.setItem('userInfo', JSON.stringify(res));
+            },
+            error: (err) => {
+            console.log('Error cargando informacion del usuario');
+            },
+          });
+
           this.popupType = 'success';
           this.popupMessage.set(`Bienvenido ${res.user?.pnombre ?? 'usuario'}`);
           this.router.navigateByUrl('/encuestas');
+
         },
         error: (err) => {
           this.popupType = 'error';
@@ -51,5 +65,7 @@ export class LoginComponent {
           );
         },
       });
+
+
   }
 }
