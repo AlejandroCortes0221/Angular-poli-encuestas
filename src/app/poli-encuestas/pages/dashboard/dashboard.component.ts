@@ -31,16 +31,7 @@ export class DashboardComponent implements OnInit {
       btnText: 'Ver Usuarios',
       classColor: 'bg-[#2862e15f]',
       route: 'encuestas/usuarios',
-    },
-    {
-      id: 3,
-      nombre: 'Reportes',
-      total: '2',
-      ruta: 'reportes',
-      btnText: 'Ver Reportes',
-      classColor: 'bg-[#2862e15f]',
-      route: 'encuestas/reportes',
-    },
+    }
   ];
 
   ngOnInit(): void {

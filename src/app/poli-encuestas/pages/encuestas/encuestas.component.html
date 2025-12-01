@@ -1,4 +1,4 @@
-<div class="w-full p-6 bg-theme-blue-king  rounded-xl shadow-lg shadow-black/20 mt-6">
+<div class="w-full p-6 bg-theme-blue-king rounded-xl shadow-lg shadow-black/20 mt-6">
   <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
     <i class="fa-solid fa-file text-[#FADF63]"></i>
     Listado de encuestas
@@ -9,7 +9,7 @@
       <input
         type="text"
         placeholder="Buscar por Nombre o NIT..."
-        class="w-full py-2 pl-10 pr-4 rounded-lg bg-theme-orange text-white placeholder-gray-400 border border-transparent focus:border-theme-blue-king  focus:ring-1 focus:ring-theme-blue-king  transition-all"
+        class="w-full py-2 pl-10 pr-4 rounded-lg bg-theme-orange text-white placeholder-gray-400 border border-transparent focus:border-theme-blue-king focus:ring-1 focus:ring-theme-blue-king transition-all"
       />
       <i
         class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
@@ -27,68 +27,59 @@
     <table class="min-w-full divide-y divide-white/10">
       <thead class="bg-theme-orange">
         <tr>
-          <th
-            scope="col"
-            class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider rounded-tl-lg"
-          >
-            empresa
-          </th>
-          <th
-            scope="col"
-            class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider"
-          >
-            titulo
-          </th>
-          <th
-            scope="col"
-            class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider"
-          >
-            descripcion
-          </th>
-          <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider rounded-tr-lg ">
-            Acciones
-          </th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider rounded-tl-lg">Empresa</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Título</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Descripción</th>
+          <th class="px-6 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider">Encuesta</th>
+          <th class="px-6 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider rounded-tr-lg">Acciones</th>
         </tr>
       </thead>
 
       <tbody class="divide-y divide-white/10">
         @for (encuesta of encuestas(); track encuesta.id) {
           <tr class="hover:bg-[#0e3967] transition-colors duration-150">
-          <td class="px-6 py-4 whitespace-nowrap">
-            <div class="flex items-center">
-              <i
-                class="fa-solid fa-book text-xl text-[#78C2AD] mr-3"
-              ></i>
-              <div class="text-sm font-medium text-white">{{ encuesta.empresa_nombre }}</div>
-            </div>
-          </td>
-          <td class="px-6 py-4 whitespace-nowrap">
-            <div class="text-sm text-gray-400">{{ encuesta.titulo }}</div>
-          </td>
-           <td class="px-6 py-4 whitespace-nowrap">
-            <div class="text-sm text-gray-400">{{ encuesta.descripcion }}</div>
-          </td>
-           
-          <td
-            class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
-          >
-           <button
-            class="text-white hover:text-indigo-300 mr-4 cursor-pointer"
-            (click)="openDialog(encuesta)"
-          >
-              <i class="fa-solid fa-pencil"></i>
-            </button>
-            <button
-              class="text-red-400 hover:text-red-300 cursor-pointer"
-              (click)="eliminarEncuesta(encuesta.id)"
-            >
-              <i class="fa-solid fa-trash"></i>
-            </button>
-          </td>
-        </tr>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="flex items-center">
+                <i class="fa-solid fa-book text-xl text-[#78C2AD] mr-3"></i>
+                <div class="text-sm font-medium text-white">{{ encuesta.empresa_nombre }}</div>
+              </div>
+            </td>
+
+            <td class="px-2 py-4 whitespace-nowrap max-w-[20px]">
+              <div class="text-sm text-gray-400 truncate">{{ encuesta.titulo }}</div>
+            </td>
+
+            <td class="px-2 py-4 whitespace-nowrap max-w-[20px]">
+              <div class="text-sm text-gray-400 truncate">{{ encuesta.descripcion }}</div>
+            </td>
+
+            <!-- Nueva columna para enlace a encuesta -->
+            <td class="px-2 py-4 whitespace-nowrap text-center">
+              <a
+                [href]="'/respuesta/' + encuesta.id"
+                target="_blank"
+                class="text-blue-400 underline hover:text-blue-300"
+              >
+                Link
+              </a>
+            </td>
+
+            <td class="px-2 py-4 whitespace-nowrap text-center text-sm font-medium">
+              <button class="text-white hover:text-indigo-300 mr-4 cursor-pointer" (click)="openDialog(encuesta)">
+                <i class="fa-solid fa-pencil"></i>
+              </button>
+              <button class="text-white hover:text-indigo-300 mr-4 cursor-pointer" (click)="openDialogReporte(encuesta)">
+                <i class="fa-solid fa-file"></i>
+              </button>
+              <button class="text-red-400 hover:text-red-300 cursor-pointer" (click)="eliminarEncuesta(encuesta.id)">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </td>
+          </tr>
         }
       </tbody>
     </table>
   </div>
 </div>
+
 <loading [type]="popupType" [message]="popupMessage()"></loading>

@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { finalize } from 'rxjs';
 import { LoadingComponent } from "../../../shared/loading/loading.component";
 import { FormsEncuestaComponent } from './forms-encuesta/forms-encuesta.component';
+import { ReporteEncuestaComponent } from './reporte-encuesta/reporte-encuesta.component';
 
 
 @Component({
@@ -67,6 +68,15 @@ export class EncuestasComponent {
       if (refresh) {
         this.cargarEncuestas();
       }
+    });
+  }
+
+  openDialogReporte(reporte?: any): void {
+    const dialogRef = this.dialog.open(ReporteEncuestaComponent, {
+      width: '50vw',
+      height: '580px',
+      maxWidth: '90vw',
+      data: reporte ?? null
     });
   }
 

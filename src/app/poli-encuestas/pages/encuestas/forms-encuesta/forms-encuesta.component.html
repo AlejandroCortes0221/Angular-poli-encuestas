@@ -2,7 +2,7 @@
   class="w-full h-full flex flex-col justify-start items-center p-8 bg-theme-blue-king rounded-2xl shadow-xl text-white overflow-auto"
 >
   <header class="w-full pb-6 border-b border-white/10 mb-8">
-    <h1 class="text-4xl font-semibold text-white">Crear Nueva Encuesta</h1>
+    <h1 class="text-4xl font-semibold text-white">{{ data ? 'Editar' : 'Crear Nueva' }} Encuesta</h1>
     <p class="text-gray-400 text-base mt-1">
       Define la estructura y añade las preguntas a tu encuesta.
     </p>
